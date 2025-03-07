@@ -11,3 +11,7 @@ variable pub_subnet {
 variable private_subnet {
   type = string
 }
+
+variable region {
+  type = string
+}
