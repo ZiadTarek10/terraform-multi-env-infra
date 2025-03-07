@@ -1,19 +1,12 @@
-resource "aws_subnet" "public_subnet" {
+resource "aws_subnet" "subnet" {
+  for_each = { for subnet in var.subnet_list : subnet.name => subnet }
   vpc_id     = aws_vpc.main.id
-  cidr_block = var.pub_subnet
+  cidr_block = each.value.cidr_block
+
+  map_public_ip_on_launch = each.value.type == "public" ? true : false
 
   tags = {
-    Name = "public_subnet"
+    Name = each.value.name
   }
 }
 
-
-
-resource "aws_subnet" "private_subnet" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = var.private_subnet
-
-  tags = {
-    Name = "private_subnet"
-  }
-}

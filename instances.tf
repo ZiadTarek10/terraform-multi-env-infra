@@ -6,7 +6,7 @@ resource "aws_instance" "bastion" {
     Name = "terraform-bastion"
   }
   vpc_security_group_ids = [aws_security_group.allow_ssh.id]
-  subnet_id              = aws_subnet.public_subnet.id
+  subnet_id              = aws_subnet.subnet["public_subnet"].id
 }
 
 
@@ -19,7 +19,7 @@ resource "aws_instance" "application" {
     Name = "terraform-application"
   }
   vpc_security_group_ids = [aws_security_group.second_sg.id]
-  subnet_id              = aws_subnet.private_subnet.id
+  subnet_id              = aws_subnet.subnet["private_subnet"].id
 }
 
 

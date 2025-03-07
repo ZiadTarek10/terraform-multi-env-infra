@@ -3,15 +3,16 @@ variable vpc_cidr {
 
 }
 
-
-variable pub_subnet {
-  type = string
-}
-
-variable private_subnet {
-  type = string
-}
-
 variable region {
   type = string
+}
+
+
+
+variable subnet_list {
+  type = list(object({
+    name = string
+    cidr_block = string
+    type = string
+  }))
 }
