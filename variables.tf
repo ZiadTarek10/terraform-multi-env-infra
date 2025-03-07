@@ -9,10 +9,11 @@ variable region {
 
 
 
-variable subnet_list {
+variable "subnet_list" {
   type = list(object({
-    name = string
-    cidr_block = string
-    type = string
+    name              = string
+    cidr_block        = string
+    type              = string
+    availability_zone = string
   }))
 }

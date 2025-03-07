@@ -12,9 +12,12 @@ resource "aws_route_table" "public_rt" {
 }
 
 resource "aws_route_table_association" "a" {
-  subnet_id      = aws_subnet.subnet["public_subnet"].id
+  for_each = { for subnet in var.subnet_list : subnet.name => subnet if subnet.type == "public" }
+
+  subnet_id      = aws_subnet.subnet[each.key].id
   route_table_id = aws_route_table.public_rt.id
 }
+
 
 resource "aws_route_table" "private_rt" {
   vpc_id = aws_vpc.main.id
